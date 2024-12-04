@@ -3,6 +3,7 @@ import { submitComment } from '../services';
 
 const CommentsForm = ({ slug }) => {
   const [error, setError] = useState(false);
+  const [linkClick, setLinkClick] = useState(false);
   const [localStorage, setLocalStorage] = useState(null);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', comment: '', storeData: false });
@@ -35,9 +36,11 @@ const CommentsForm = ({ slug }) => {
 
   const handlePostSubmission = () => {
     setError(false);
+    setLinkClick(true);
     const { name, email, comment, storeData } = formData;
     if (!name || !email || !comment) {
       setError(true);
+      setLinkClick(false);
       return;
     }
     const commentObj = {
@@ -68,6 +71,7 @@ const CommentsForm = ({ slug }) => {
             ...formData,
           }));
           setShowSuccessMessage(true);
+          setLinkClick(false);
           setTimeout(() => {
             setShowSuccessMessage(false);
           }, 3000);
@@ -93,7 +97,7 @@ const CommentsForm = ({ slug }) => {
       </div>
       {error && <p className="text-xs text-red-500">All fields are mandatory</p>}
       <div className="mt-8">
-        <button type="button" onClick={handlePostSubmission} style={{backgroundColor:"#35185A"}} className="transition duration-500 ease hover:bg-indigo-900 inline-block bg-[#35185A] text-lg font-medium rounded-full text-white px-8 py-3 cursor-pointer">Post Comment</button>
+        <button type="button" disabled={linkClick} onClick={handlePostSubmission} style={{backgroundColor:"#35185A"}} className="transition duration-500 ease hover:bg-indigo-900 inline-block bg-[#35185A] text-lg font-medium rounded-full text-white px-8 py-3 cursor-pointer">{!linkClick? "Post Comment" : "Submitting..."}</button>
         {showSuccessMessage && <span className="text-xl float-right font-semibold mt-3 text-green-500">Comment submitted for review</span>}
       </div>
     </div>

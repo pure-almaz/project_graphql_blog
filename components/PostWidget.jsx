@@ -22,7 +22,8 @@ const PostWidget = ({ categories, slug }) => {
   }, [slug]);
 
   return (
-    <div style={{backgroundColor:"#D9D9D9"}} className="bg-[#D9D9D9] shadow-lg rounded-lg p-8 pb-12 mb-8">
+    <>{relatedPosts?.length > 0 &&
+        <div style={{backgroundColor:"#D9D9D9"}} className="bg-[#D9D9D9] shadow-lg rounded-lg p-8 pb-12 mb-8">
       <h3 className="text-xl mb-8 font-semibold border-b pb-4">{slug ? 'Related Posts' : 'Recent Posts'}</h3>
       {relatedPosts.map((post, index) => (
         <div key={index} className="flex items-center w-full mb-4">
@@ -44,6 +45,7 @@ const PostWidget = ({ categories, slug }) => {
         </div>
       ))}
     </div>
+    }</>
   );
 };
 
