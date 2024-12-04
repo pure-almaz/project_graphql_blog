@@ -5,9 +5,26 @@ import Link from 'next/link';
 
 import { graphCMSImageLoader } from '../util';
 import { getSimilarPosts, getRecentPosts } from '../services';
+import { useRouter } from 'next/router';
 
 const PostWidget = ({ categories, slug }) => {
+  const [linkClick, setLinkClick] = useState(false);
   const [relatedPosts, setRelatedPosts] = useState([]);
+  const router = useRouter();
+
+  useEffect(() => {
+    const handleRouteChangeComplete = () => {
+      setLinkClick(false);  // Only set to false after visible change
+    };
+
+    // Listen for route change completion
+    router.events.on('routeChangeComplete', handleRouteChangeComplete);
+
+    // Cleanup the event listener on unmount
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChangeComplete);
+    };
+  }, [router, linkClick]); 
 
   useEffect(() => {
     if (slug) {
@@ -38,9 +55,9 @@ const PostWidget = ({ categories, slug }) => {
               src={post.featuredImage.url}
             />
           </div>
-          <div className="flex-grow ml-4">
+          <div onClick={() => setLinkClick(true)} className="flex-grow ml-4">
             <p className="text-gray-500 font-xs">{moment(post.createdAt).format('MMM DD, YYYY')}</p>
-            <Link href={`/post/${post.slug}`} className="text-md" key={index}>{post.title}</Link>
+            <Link href={`/post/${post.slug}`} className="text-md" key={index}>{!linkClick? post.title : "Loading..."}</Link>
           </div>
         </div>
       ))}
