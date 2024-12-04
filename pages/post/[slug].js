@@ -38,12 +38,14 @@ export default PostDetails;
 
 // Fetch data at build time
 export async function getStaticProps({ params }) {
-  const data = await getPostDetails(params.slug);
-  return {
-    props: {
-      post: data,
-    },
-  };
+  if (params?.slug) {
+    const data = await getPostDetails(params.slug);
+    return {
+      props: {
+        post: data,
+      },
+    };
+  }
 }
 
 // Specify dynamic routes to pre-render pages based on data.

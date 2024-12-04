@@ -7,17 +7,17 @@ import { graphCMSImageLoader } from '../util';
 
 const PostCard = ({ post }) => (
   <div style={{backgroundColor:"#D9D9D9"}} className="bg-[#D9D9D9] shadow-lg rounded-lg p-0  pb-12 mb-8">
-    <div className="relative overflow-hidden shadow-md pb-80 mb-6">
+    <div className="relative overflow-hidden shadow-md mb-6">
     <img 
       src={post.featuredImage.url} 
-      alt="" 
-      className="object-top absolute h-80 w-full object-cover shadow-lg rounded-tl-lg rounded-tr-lg"
+      alt={post.title}
+      className="h-full w-full object-cover shadow-lg rounded-tl-lg rounded-tr-lg"
     />
 
-      <div className="absolute top-0 left-0 right-0 bottom-0 bg-black opacity-50"></div> {/* Dark overlay */}
+      <div className="absolute top-0 left-0 right-0 bottom-0 hover:bg-black opacity-50"></div> {/* Dark overlay */}
 
     {/* Text on top of the image */}
-    <h2 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-3xl font-semibold text-center cursor-pointer transition duration-700 hover:text-gray-700 z-10">
+    <h2 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-transparent text-3xl font-semibold text-center cursor-pointer transition duration-700 hover:text-white hover:bg-black z-10">
       <Link href={`/post/${post.slug}`}>{post.title}</Link>
     </h2>
     </div>
@@ -28,10 +28,11 @@ const PostCard = ({ post }) => (
           unoptimized
           loader={graphCMSImageLoader}
           alt={post.author.name}
-          height="30"
-          width="30"
+          height="27"
+          width="27"
           className="align-middle rounded-full"
           src={post.author.photo.url}
+          style={{border:"1px solid #35185A"}}
         />
         <p className="inline align-middle text-gray-700 ml-2 font-medium text-lg italic">{post.author.name}</p>
       </div>
