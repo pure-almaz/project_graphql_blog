@@ -1,31 +1,35 @@
-# Stage 1: Build the Vite app
+# Stage 1: Build the Next.js app
 FROM node:alpine3.20 as build
 
 # Set the working directory
 WORKDIR /app
 
-# Copy package.json and install dependencies
+# Copy package.json and package-lock.json for dependency installation
 COPY package.json package-lock.json ./
+
+# Install dependencies
 RUN npm install
 
-# Copy the rest of the application code and build the app
+# Copy the rest of the application code
 COPY . .
+
+# Build the Next.js application
 RUN npm run build
 
-# Stage 2: Serve the app with Nginx
-FROM nginx:1.23-alpine
+# Stage 2: Serve the app using a production-ready environment
+FROM node:alpine3.20
 
 # Set the working directory
-WORKDIR /usr/share/nginx/html
+WORKDIR /app
 
-# Remove default Nginx static files
-RUN rm -rf *
+# Copy only the necessary files from the build stage
+COPY --from=build /app ./
 
-# Copy built files from the previous stage
-COPY --from=build /app/dist .
+# Install production dependencies only
+RUN npm install --production
 
-# Expose port 80
-EXPOSE 80
+# Expose the port Next.js runs on (default is 3000)
+EXPOSE 3000
 
-# Run Nginx
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+# Start the Next.js application
+CMD ["npm", "start"]
