@@ -21,8 +21,7 @@ export default async function asynchandler(req, res) {
       createComment(data: {name: $name, email: $email, comment: $comment, post: {connect: {slug: $slug}}}) { id }
     }
   `; 
-
-  console.log({request:req.body})
+  
   try {
     const result = await graphQLClient.request(query, {
       name: req.body.name,
