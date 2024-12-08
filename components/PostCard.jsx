@@ -9,7 +9,7 @@ const PostCard = ({ post }) => {
   const [linkClick, setLinkClick] = useState(false);
 
   return (
-    <div style={{backgroundColor:"#D9D9D9"}} className="bg-[#D9D9D9] shadow-lg rounded-lg p-0  pb-12 mb-8">
+    <div style={{backgroundColor:"white"}} className="bg-white shadow-lg rounded-lg p-0  pb-12 mb-8">
       <div className="relative overflow-hidden shadow-md mb-6">
       <img 
         src={post.featuredImage.url} 

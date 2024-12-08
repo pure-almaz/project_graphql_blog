@@ -3,48 +3,103 @@ import React from 'react';
 import moment from 'moment';
 
 const PostDetail = ({ post }) => {
-  const getContentFragment = (index, text, obj, type) => {
-    let modifiedText = text;
 
+  const getContentFragment = (index, text, obj, type) => {
+    let modifiedText = text || '';
+  
+    // Handle formatting options
     if (obj) {
       if (obj.bold) {
-        modifiedText = (<b key={index}>{text}</b>);
+        modifiedText = <b key={index}>{modifiedText}</b>;
       }
-
       if (obj.italic) {
-        modifiedText = (<em key={index}>{text}</em>);
+        modifiedText = <em key={index}>{modifiedText}</em>;
       }
-
       if (obj.underline) {
-        modifiedText = (<u key={index}>{text}</u>);
+        modifiedText = <u key={index}>{modifiedText}</u>;
       }
     }
-
+  
+    // Render based on type
     switch (type) {
-      case 'heading-three':
-        return <h3 key={index} className="text-xl font-semibold mb-4">{modifiedText.map((item, i) => <React.Fragment key={i}>{item}</React.Fragment>)}</h3>;
+    case 'heading-two':
+      return (
+        <h2 key={index} className="text-2xl font-semibold mb-4">
+          {obj.children?.map((child, i) => getContentFragment(i, child.text, child, child.type))}
+        </h2>
+      );
+    case 'heading-three':
+      return (
+        <h3 key={index} className="text-xl font-semibold mb-4">
+          {obj.children?.map((child, i) => getContentFragment(i, child.text, child, child.type))}
+        </h3>
+      );
+    case 'heading-four':
+      return (
+        <h4 key={index} className="text-xl text-gray-700 font-bold mb-4">
+          {obj.children?.map((child, i) => getContentFragment(i, child.text, child, child.type))}
+        </h4>
+      );
       case 'paragraph':
-        return <p key={index} className="mb-8">{modifiedText.map((item, i) => <React.Fragment key={i}>{item}</React.Fragment>)}</p>;
-      case 'heading-four':
-        return <h4 key={index} className="text-md font-semibold mb-4">{modifiedText.map((item, i) => <React.Fragment key={i}>{item}</React.Fragment>)}</h4>;
+        return (
+          <p key={index} className="mb-8">
+            {obj.children?.map((child, i) => getContentFragment(i, child.text, child, child.type))}
+          </p>
+        );
       case 'image':
         return (
           <img
             key={index}
-            alt={obj.title}
-            height={obj.height}
-            width={obj.width}
             src={obj.src}
+            alt={obj.altText || 'Image'}
+            title={obj.title || ''}
+            className="w-full h-auto mb-4"
+            style={{ maxWidth: `${obj.width}px`, height: 'auto' }}
           />
+        );
+      case 'unordered-list':
+      case 'bulleted-list':
+        return (
+          <ul key={index} className="list-disc ml-6 mb-4">
+            {obj.children?.map((child, i) => getContentFragment(i, null, child, child.type))}
+          </ul>
+        );
+      case 'ordered-list':
+        return (
+          <ol key={index} className="list-decimal ml-6 mb-4">
+            {obj.children?.map((child, i) => getContentFragment(i, null, child, child.type))}
+          </ol>
+        );
+      case 'list-item':
+        return (
+          <li key={index}>
+            {obj.children?.map((child, i) => getContentFragment(i, child.text, child, child.type))}
+          </li>
+        );
+      case 'list-item-child':
+        return obj.children?.map((child, i) => getContentFragment(i, child.text, child, child.type));
+      case 'link':
+        return (
+          <a
+            key={index}
+            href={obj.href}
+            target='_blank'
+            rel="noopener noreferrer"
+            className="text-blue-600 underline"
+          >
+            {obj.children?.map((child, i) => getContentFragment(i, child.text, child, child.type))}
+          </a>
         );
       default:
         return modifiedText;
     }
   };
+  
+  
 
   return (
     <>
-      <div style={{backgroundColor:"#D9D9D9"}} className="bg-[#D9D9D9] shadow-lg rounded-lg lg:p-8 pb-12 mb-8">
+      <div style={{backgroundColor:"white"}} className="bg-white shadow-lg rounded-lg lg:p-8 pb-12 mb-8">
         <div className="relative overflow-hidden shadow-md mb-6">
           <img src={post.featuredImage.url} alt={post.title} className="object-top h-full w-full object-cover  shadow-lg rounded-t-lg lg:rounded-lg" />
         </div>
@@ -70,10 +125,10 @@ const PostDetail = ({ post }) => {
           </div>
           <h1 className="mb-8 text-3xl font-semibold">{post.title}</h1>
           {post.content.json.children.map((typeObj, index) => {
-            const children = typeObj.children.map((item, itemindex) => getContentFragment(itemindex, item.text, item));
-
-            return getContentFragment(index, children, typeObj, typeObj.type);
+            return getContentFragment(index, null, typeObj, typeObj.type);
           })}
+
+
         </div>
       </div>
 
