@@ -1,8 +1,11 @@
+components/Comments.jsx
+Don't forget to export these files in index.js of components. You can then add them to post [slug].js under pages
+
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import parse from 'html-react-parser';
 
-import { getComments } from '../services';
+//import { getComments } from '../services';
 
 const Comments = ({ slug }) => {
   const [comments, setComments] = useState([]);
@@ -40,4 +43,4 @@ const Comments = ({ slug }) => {
   );
 };
 
-export default Comments;
+//export default Comments;

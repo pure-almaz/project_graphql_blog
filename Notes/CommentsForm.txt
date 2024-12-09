@@ -1,5 +1,6 @@
+components/CommentsForm.jsx
 import React, { useState, useEffect } from 'react';
-import { submitComment } from '../services';
+//import { submitComment } from '../services';
 
 const CommentsForm = ({ slug }) => {
   const [error, setError] = useState(false);
@@ -117,4 +118,4 @@ const CommentsForm = ({ slug }) => {
   );
 };
 
-export default CommentsForm;
+//export default CommentsForm;

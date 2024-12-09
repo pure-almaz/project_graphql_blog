@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Build and export the Next.js static site
-RUN npm run build && npm run export
+RUN npm run build
 
 # Stage 2: Use a lightweight web server to serve the static files
 FROM nginx:alpine
