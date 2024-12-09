@@ -1,3 +1,4 @@
+
 import React from "react";
 
 function Footer() {
@@ -11,7 +12,6 @@ function Footer() {
           src="/logo.png" 
           onClick={() => toApp("https://www.skiie.org")}
           alt="SKIIE Learn footer icon" 
-          style={{width:"5%", height:"3%"}}
           className="w-[5%] h-[3%] cursor-pointer mx-auto"
         />
         <p className="mt-2">&copy; 2024 SKIIE LLP</p>

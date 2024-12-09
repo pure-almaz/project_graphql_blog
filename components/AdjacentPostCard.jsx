@@ -29,7 +29,7 @@ const AdjacentPostCard = ({ post, position }) => {
         <p className="text-white text-shadow font-semibold text-xs">{moment(post.createdAt).format('MMM DD, YYYY')}</p>
         <p className="text-white text-shadow font-semibold text-2xl text-center">{!linkClick? post.title : "Loading..."}</p>
       </div>
-      <Link href={`/post/${post.slug}`}><span className="z-10 cursor-pointer absolute w-full h-full" /></Link>
+      <Link href={`/post/${post.slug}`} passHref><span className="z-10 cursor-pointer absolute w-full h-full" /></Link>
       {position === 'LEFT' && (
         <div style={{backgroundColor:"#35185A"}} className="absolute arrow-btn bottom-5 text-center py-3 cursor-pointer bg-[#35185A] left-4 rounded-full">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white w-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">

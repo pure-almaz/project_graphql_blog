@@ -1,6 +1,7 @@
 import React from 'react';
 
 import moment from 'moment';
+import Image from 'next/image';
 
 const PostDetail = ({ post }) => {
 
@@ -94,8 +95,6 @@ const PostDetail = ({ post }) => {
         return modifiedText;
     }
   };
-  
-  
 
   return (
     <>
@@ -106,7 +105,7 @@ const PostDetail = ({ post }) => {
         <div className="px-4 lg:px-0">
           <div className="flex items-center mb-8 w-full">
             <div className="hidden md:flex items-center justify-center lg:mb-0 lg:w-auto mr-8 items-center">
-              <img
+              <Image
                 alt={post.author.name}
                 height="27"
                 width="27"
@@ -127,11 +126,8 @@ const PostDetail = ({ post }) => {
           {post.content.json.children.map((typeObj, index) => {
             return getContentFragment(index, null, typeObj, typeObj.type);
           })}
-
-
         </div>
       </div>
-
     </>
   );
 };

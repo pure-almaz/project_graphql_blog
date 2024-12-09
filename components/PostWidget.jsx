@@ -36,7 +36,7 @@ const PostWidget = ({ categories, slug }) => {
         setRelatedPosts(result);
       });
     }
-  }, [slug]);
+  }, [slug, categories]);
 
   return (
     <>{relatedPosts?.length > 0 &&

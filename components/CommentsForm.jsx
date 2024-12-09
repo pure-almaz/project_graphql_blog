@@ -8,7 +8,6 @@ const CommentsForm = ({ slug }) => {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', comment: '', storeData: false });
 
-
   useEffect(() => {
     setLocalStorage(window.localStorage);
     const initialFormData = {
@@ -97,8 +96,22 @@ const CommentsForm = ({ slug }) => {
       </div>
       {error && <p className="text-xs text-red-500">All fields are mandatory</p>}
       <div className="mt-8">
-        <button type="button" disabled={linkClick} onClick={handlePostSubmission} style={{backgroundColor:"#35185A"}} className="transition duration-500 ease hover:bg-indigo-900 inline-block bg-[#35185A] text-lg font-medium rounded-full text-white px-8 py-3 cursor-pointer">{!linkClick? "Post Comment" : "Submitting..."}</button>
+      
+        <button 
+        type="button" 
+        disabled={linkClick} 
+        onClick={handlePostSubmission} 
+        style={{backgroundColor:"#35185A"}} 
+        className="transition duration-500 ease hover:bg-indigo-900 inline-block bg-[#35185A] 
+        text-lg font-medium rounded-full text-white px-8 py-3 cursor-pointer"
+        >
+
+        {!linkClick? "Post Comment" : "Submitting..."}
+
+        </button>
+
         {showSuccessMessage && <span className="text-xl float-right font-semibold mt-3 text-green-500">Comment submitted for review</span>}
+
       </div>
     </div>
   );

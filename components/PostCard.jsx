@@ -20,7 +20,11 @@ const PostCard = ({ post }) => {
         <div className="absolute top-0 left-0 right-0 bottom-0 hover:bg-black opacity-50"></div> {/* Dark overlay */}
   
       {/* Text on top of the image */}
-      <h2 onClick={() => setLinkClick(true)} className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-transparent text-3xl font-semibold text-center cursor-pointer transition duration-700 hover:text-white hover:bg-black z-10">
+      <h2 
+      onClick={() => setLinkClick(true)} 
+      className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-transparent 
+      text-3xl font-semibold text-center cursor-pointer transition duration-700 hover:text-white hover:bg-black z-10"
+      >
         <Link href={`/post/${post.slug}`}>{post.title}</Link>
       </h2>
       </div>
@@ -50,8 +54,15 @@ const PostCard = ({ post }) => {
         {post.excerpt}
       </p>
       <div className="text-center">
-        <Link href={`/post/${post.slug}`}>
-          <span onClick={() => setLinkClick(true)} style={{backgroundColor:"#35185A"}} className="transition duration-500 ease transform hover:-translate-y-1 inline-block bg-[#35185A] text-lg font-medium rounded-full text-white px-8 py-3 cursor-pointer">{!linkClick? "Continue Reading": "Loading..."}</span>
+        <Link href={`/post/${post.slug}`} passHref>
+          <span 
+          onClick={() => setLinkClick(true)} 
+          style={{backgroundColor:"#35185A"}} 
+          className="transition duration-500 ease transform hover:-translate-y-1 inline-block bg-[#35185A] 
+          text-lg font-medium rounded-full text-white px-8 py-3 cursor-pointer"
+          >
+          {!linkClick? "Continue Reading": "Loading..."}
+          </span>
         </Link>
       </div>
     </div>

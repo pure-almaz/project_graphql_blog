@@ -1,4 +1,6 @@
 module.exports = {
-  reactStrictMode: true,
-  output: 'export',
+  reactStrictMode: false,
+  images: {
+    domains: ['us-west-2.graphassets.com'], 
+  },
 };

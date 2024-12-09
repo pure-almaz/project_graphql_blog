@@ -35,7 +35,7 @@ const Header = () => {
 <div className="container mx-auto px-10 mb-8">
   <div className="border-b w-full inline-block border-[#35185A] py-4">
   <div className="md:float-left block flex items-end space-x-4">
-  <Link href="/">
+  <Link href="/" passHref>
     <span onClick={() => setHomeClick(true)} className='relative'>
       <img 
         title="logo" 
@@ -52,7 +52,7 @@ const Header = () => {
 
     <div className="hidden md:float-left md:contents">
       {categories.map((category, index) => (
-        <Link key={index} href={`/category/${category.slug}`}>
+        <Link key={index} href={`/category/${category.slug}`} passHref>
           <span onClick={() => setLinkClick(true)} className="md:float-right mt-2 align-middle text-white ml-4 font-semibold cursor-pointer">
             {!linkClick? category.name : "Loading..."}
           </span>

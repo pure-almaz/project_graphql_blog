@@ -4,28 +4,32 @@ FROM node:alpine3.20 as build
 # Set the working directory
 WORKDIR /app
 
-# Copy package.json and install dependencies
+# Copy package.json and package-lock.json for dependency installation
 COPY package.json package-lock.json ./
+
+# Install dependencies
 RUN npm install
 
 # Copy the rest of the application code
 COPY . .
 
-# Generate the static site
+# Build the Next.js application
 RUN npm run build
-RUN npm run export
 
-# Stage 2: Serve the static files with Nginx
-FROM nginx:1.23-alpine
+# Stage 2: Serve the app using a production-ready environment
+FROM node:alpine3.20
 
-# Remove default Nginx files
-RUN rm -rf /usr/share/nginx/html/*
+# Set the working directory
+WORKDIR /app
 
-# Copy the static files from the build stage
-COPY --from=build /app/out /usr/share/nginx/html
+# Copy only the necessary files from the build stage
+COPY --from=build /app ./
 
-# Expose port 80 for the static site
-EXPOSE 80
+# Install production dependencies only
+RUN npm install --production
 
-# Start Nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Expose the port Next.js runs on (default is 3000)
+EXPOSE 3000
+
+# Start the Next.js application
+CMD ["npm", "start"]
