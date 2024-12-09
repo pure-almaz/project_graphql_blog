@@ -13,23 +13,17 @@ RUN npm install
 # Copy the rest of the application code
 COPY . .
 
-# Build the Next.js application
-RUN npm run build
+# Build and export the Next.js static site
+RUN npm run build && npm run export
 
-# Stage 2: Serve the app using a production-ready environment
-FROM node:alpine3.20
+# Stage 2: Use a lightweight web server to serve the static files
+FROM nginx:alpine
 
-# Set the working directory
-WORKDIR /app
+# Copy the exported static files to the Nginx server directory
+COPY --from=build /app/out /usr/share/nginx/html
 
-# Copy only the necessary files from the build stage
-COPY --from=build /app ./
+# Expose the port Nginx serves on (default is 80)
+EXPOSE 80
 
-# Install production dependencies only
-RUN npm install --production
-
-# Expose the port Next.js runs on (default is 3000)
-EXPOSE 3000
-
-# Start the Next.js application
-CMD ["npm", "start"]
+# Start Nginx
+CMD ["nginx", "-g", "daemon off;"]
