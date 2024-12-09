@@ -32,7 +32,7 @@ const Header = () => {
   }, []);
 
   return (
-<div className="container mx-auto px-10 mb-8">
+<div className="container mx-auto px-10 mb-8 md: px-2 mb-4 sm: px-1 mb-2">
   <div className="border-b w-full inline-block border-[#35185A] py-4">
   <div className="md:float-left block flex items-end space-x-4">
   <Link href="/" passHref>
