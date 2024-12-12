@@ -75,7 +75,7 @@ function Contact({ isOpen, onClose }) {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
-      <div style={{backgroundColor:"#D9D9D9"}} className="bg-[#D9D9D9] rounded-lg p-8 w-full max-w-md relative">
+      <div className="bg-white rounded-lg p-8 w-full max-w-md relative">
         <button onClick={onClose} className="absolute top-4 right-4 text-3xl text-[#00181C] hover:text-[#35185A]">&times;</button>
         <h2 className="text-2xl font-bold mb-6 text-center text-[#35185A]">Get a free consultation.</h2>
 
@@ -83,7 +83,7 @@ function Contact({ isOpen, onClose }) {
           <div>
             <input
               type="text"
-              style={{backgroundColor:"#D9D9D9"}}
+              style={{backgroundColor:"white"}}
               placeholder="Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -94,7 +94,7 @@ function Contact({ isOpen, onClose }) {
           <div>
             <input
               type="email"
-              style={{backgroundColor:"#D9D9D9"}}
+              style={{backgroundColor:"white"}}
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -105,7 +105,7 @@ function Contact({ isOpen, onClose }) {
           <div>
             <textarea
               placeholder="How may we help you?"
-              style={{backgroundColor:"#D9D9D9"}}
+              style={{backgroundColor:"white"}}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               className="w-full border-b-2 focus:outline-none focus:border-[#35185A] p-2 h-32"
@@ -119,7 +119,7 @@ function Contact({ isOpen, onClose }) {
           <button
             type="submit"
             disabled={sending}
-            className="bg-[#35185A] text-[#D9D9D9] py-2 px-4 w-full rounded-lg transition-colors hover:bg-[#00181C]"
+            className="bg-[#35185A] text-[white] py-2 px-4 w-full rounded-lg transition-colors hover:bg-[#00181C]"
           >
             {sending ? 'Sending...' : 'Send Message'}
           </button>
