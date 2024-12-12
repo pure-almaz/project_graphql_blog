@@ -52,7 +52,7 @@ const FeaturedPosts = () => {
   );
 
   return (
-    <div className="mb-8">
+    <div className="mb-8 w-full">
     <Carousel
       infinite
       customLeftArrow={customLeftArrow}
@@ -61,11 +61,16 @@ const FeaturedPosts = () => {
       itemClass=""
     >
     {dataLoaded &&
+    <div className="flex items-center">
+    {
       featuredPosts.map((post, index) => (
         <div key={index} className="px-4">
           <FeaturedPostCard post={post} />
         </div>
-      ))}
+      ))
+    }
+    </div>
+    }
     </Carousel>
     </div>
   );
