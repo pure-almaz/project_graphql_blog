@@ -4,6 +4,7 @@ import moment from 'moment';
 import Image from 'next/image';
 
 const PostDetail = ({ post }) => {
+  console.log({ post })
 
   const getContentFragment = (index, text, obj, type) => {
     let modifiedText = text || '';
@@ -23,28 +24,36 @@ const PostDetail = ({ post }) => {
   
     // Render based on type
     switch (type) {
-    case 'heading-two':
-      return (
-        <h2 key={index} className="text-2xl font-semibold mb-4">
-          {obj.children?.map((child, i) => getContentFragment(i, child.text, child, child.type))}
-        </h2>
-      );
-    case 'heading-three':
-      return (
-        <h3 key={index} className="text-xl font-semibold mb-4">
-          {obj.children?.map((child, i) => getContentFragment(i, child.text, child, child.type))}
-        </h3>
-      );
-    case 'heading-four':
-      return (
-        <h4 key={index} className="text-xl text-gray-700 font-bold mb-4">
-          {obj.children?.map((child, i) => getContentFragment(i, child.text, child, child.type))}
-        </h4>
-      );
+      case 'heading-two':
+        return (
+          <h2 key={index} className="text-2xl font-semibold mb-4">
+            {obj.children?.map((child, i) =>
+              getContentFragment(i, child.text, child, child.type)
+            )}
+          </h2>
+        );
+      case 'heading-three':
+        return (
+          <h3 key={index} className="text-xl font-semibold mb-4">
+            {obj.children?.map((child, i) =>
+              getContentFragment(i, child.text, child, child.type)
+            )}
+          </h3>
+        );
+      case 'heading-four':
+        return (
+          <h4 key={index} className="text-xl text-gray-700 font-bold mb-4">
+            {obj.children?.map((child, i) =>
+              getContentFragment(i, child.text, child, child.type)
+            )}
+          </h4>
+        );
       case 'paragraph':
         return (
           <p key={index} className="mb-8">
-            {obj.children?.map((child, i) => getContentFragment(i, child.text, child, child.type))}
+            {obj.children?.map((child, i) =>
+              getContentFragment(i, child.text, child, child.type)
+            )}
           </p>
         );
       case 'image':
@@ -62,39 +71,82 @@ const PostDetail = ({ post }) => {
       case 'bulleted-list':
         return (
           <ul key={index} className="list-disc ml-6 mb-4">
-            {obj.children?.map((child, i) => getContentFragment(i, null, child, child.type))}
+            {obj.children?.map((child, i) =>
+              getContentFragment(i, null, child, child.type)
+            )}
           </ul>
         );
       case 'ordered-list':
         return (
           <ol key={index} className="list-decimal ml-6 mb-4">
-            {obj.children?.map((child, i) => getContentFragment(i, null, child, child.type))}
+            {obj.children?.map((child, i) =>
+              getContentFragment(i, null, child, child.type)
+            )}
           </ol>
         );
       case 'list-item':
         return (
           <li key={index}>
-            {obj.children?.map((child, i) => getContentFragment(i, child.text, child, child.type))}
+            {obj.children?.map((child, i) =>
+              getContentFragment(i, child.text, child, child.type)
+            )}
           </li>
         );
       case 'list-item-child':
-        return obj.children?.map((child, i) => getContentFragment(i, child.text, child, child.type));
+        return obj.children?.map((child, i) =>
+          getContentFragment(i, child.text, child, child.type)
+        );
       case 'link':
         return (
           <a
             key={index}
             href={obj.href}
-            target='_blank'
+            target="_blank"
             rel="noopener noreferrer"
             className="text-blue-600 underline"
           >
-            {obj.children?.map((child, i) => getContentFragment(i, child.text, child, child.type))}
+            {obj.children?.map((child, i) =>
+              getContentFragment(i, child.text, child, child.type)
+            )}
           </a>
         );
-      default:
-        return modifiedText;
+        case 'table':
+          return (
+            <table key={index} className="table-auto border-collapse border border-gray-300 mb-8">
+              {obj.children?.map((child, i) =>
+                getContentFragment(i, null, child, child.type)
+              )}
+            </table>
+          );
+        case 'table_body':
+          return (
+            <tbody key={index}>
+              {obj.children?.map((child, i) =>
+                getContentFragment(i, null, child, child.type)
+              )}
+            </tbody>
+          );
+        case 'table_row':
+          return (
+            <tr key={index} className="border border-gray-300">
+              {obj.children?.map((child, i) =>
+                getContentFragment(i, null, child, child.type)
+              )}
+            </tr>
+          );
+        case 'table_cell':
+          return (
+            <td key={index} className="border border-gray-300 px-4 py-2">
+              {obj.children?.map((child, i) =>
+                getContentFragment(i, child.text, child, child.type)
+              )}
+            </td>
+          );
+        default:
+          return modifiedText;
     }
   };
+  
 
   return (
     <>

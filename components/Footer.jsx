@@ -12,9 +12,9 @@ function Footer() {
           src="/logo.png" 
           onClick={() => toApp("https://www.skiie.org")}
           alt="SKIIE Learn footer icon" 
-          className="w-[5%] h-[3%] cursor-pointer mx-auto"
+          className="w-[5%] h-[3%] md: w-[7%] h-[5%] sm: w-[10%] h-[8%] cursor-pointer mx-auto"
         />
-        <p className="mt-2">&copy; 2024 SKIIE LLP</p>
+        <p onClick={() => toApp("https://www.skiie.org")} className="mt-2">&copy; 2024 SKIIE LLP</p>
       </footer>
     );
   }
