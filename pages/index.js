@@ -3,6 +3,8 @@ import { PostCard, Categories, PostWidget } from '../components';
 import { getPosts } from '../services';
 import Head from 'next/head';
 
+//added a new page
+
 export default function Home({ posts }) {
 
   return (
