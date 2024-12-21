@@ -47,13 +47,13 @@ const Header = () => {
     </span>
   </Link>
   
-  <h1 className="text-white lg:text-4xl md:text-3xl text-2xl font-bold">Learn - The Skiie blog.</h1>
+  <h1 className="text-[]#35185A lg:text-4xl md:text-3xl text-2xl font-bold">Learn - The Skiie blog.</h1>
 </div>
 
     <div className="hidden md:float-left md:contents">
       {categories.map((category, index) => (
         <Link key={index} href={`/category/${category.slug}`} passHref>
-          <span onClick={() => setLinkClick(true)} className="md:float-right mt-2 align-middle text-white ml-4 font-semibold cursor-pointer">
+          <span onClick={() => setLinkClick(true)} className="md:float-right mt-2 align-middle text-[#35185A] ml-4 font-semibold cursor-pointer">
             {!linkClick? category.name : "Loading..."}
           </span>
         </Link>
