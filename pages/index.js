@@ -15,7 +15,9 @@ export default function Home({ posts }) {
     <meta name="description" content="Discover expert insights on SEO and web development from Skiie's top 3% professionals. Join us in making a difference with every read." />
     </Head>
       <div className="container mx-auto px-10 mb-8 md: px-2 mb-4 sm: px-1 mb-2">
-      <FeaturedPosts />
+      <div className="hidden md:block">
+        <FeaturedPosts />
+      </div>
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
         <div className="lg:col-span-8 col-span-1">
           {posts.map((post, index) => (
