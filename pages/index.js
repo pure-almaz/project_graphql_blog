@@ -4,6 +4,7 @@ import { getCategories, getPosts } from '../services';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 //added a new page
 
