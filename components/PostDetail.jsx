@@ -4,7 +4,6 @@ import moment from 'moment';
 import Image from 'next/image';
 
 const PostDetail = ({ post }) => {
-  console.log({ post })
 
   const getContentFragment = (index, text, obj, type) => {
     let modifiedText = text || '';
