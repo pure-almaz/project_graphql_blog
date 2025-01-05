@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 
-//added a new page
+//rebuild a new page
 
 export default function Home({ posts }) {
   const [linkClick, setLinkClick] = useState(false);
